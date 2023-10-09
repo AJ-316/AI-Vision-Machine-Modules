@@ -38,13 +38,18 @@ SIDE_FRAME_PADDING = 25
 
 TAB_VIEW_PADDING = 12
 
+AI_VISION_MACHINE = "AI Vision Machine"
+DESKTOP_MOUSE_INPUT = "Desktop Mouse Input"
+DESKTOP_KEYBOARD_INPUT = "Desktop Keyboard Input"
+WORKOUT_TRAINER = "Workout Trainer"
+
 
 def load_configs():
     global FONTS
     load_fonts(**{"JetBrains Mono": [16, 24], "Verdana": [14]})
 
-    load_icons("mouse", "gym", "keyboard", "ppt", "sign_lang_letter", "sign_lang_word", size=ICON_SIZE)
-    load_icons("AI_VISION", "AI_VISION_normal", size=LOGO_SIZE)
+    load_icons(DESKTOP_MOUSE_INPUT, WORKOUT_TRAINER, DESKTOP_KEYBOARD_INPUT, "ppt", "sign_lang_letter", "sign_lang_word", size=ICON_SIZE)
+    load_icons(AI_VISION_MACHINE, f"{AI_VISION_MACHINE}_normal", size=LOGO_SIZE)
 
 
 def load_fonts(**kwargs):

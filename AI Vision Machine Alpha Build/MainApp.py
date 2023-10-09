@@ -1,6 +1,8 @@
 from CustomTabView import CustomTabView
 from typing import Literal
 from AppConfigs import *
+from DesktopMouseInputTab import DesktopMouseInputTab
+from AIVisionMachineHome import AIVisionMachineHome
 
 
 class SideFrame(ck.CTkFrame):
@@ -41,6 +43,10 @@ class MainApp:
         side_frame.create_button("Click33", pady=25)
 
         tabs = CustomTabView(main)
+        AIVisionMachineHome(tabs)
+        DesktopMouseInputTab(tabs)
+        tabs.init_tabs()
+
         tabs.pack(fill="both", expand=True, padx=24, pady=24)
 
         try:
