@@ -97,6 +97,7 @@ class CustomTabView(ck.CTkBaseClass):
 
     def _initialize_buttons_frame(self):
         if self.buttons_frame is None:
-            self.buttons_frame = ck.CTkFrame(self, fg_color="transparent",
+            self.buttons_frame = ck.CTkFrame(self, fg_color=TAB_BUTTONS_FRAME_BG,
                                              width=WIN_WIDTH - SIDE_FRAME_WIDTH - SIDE_FRAME_PADDING * 4)
-            self.buttons_frame.pack(side="top", fill="x")
+            self.buttons_frame.pack(side="top", anchor="w", padx=8, pady=8)
+            self.buttons_frame.propagate(True)

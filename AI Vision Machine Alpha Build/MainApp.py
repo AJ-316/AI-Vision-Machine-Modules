@@ -1,8 +1,9 @@
-from CustomTabView import CustomTabView
+import threading
 from typing import Literal
-from AppConfigs import *
-from DesktopMouseInputTab import DesktopMouseInputTab
-from AIVisionMachineHome import AIVisionMachineHome
+
+from CustomTabView import CustomTabView
+from Machine_Vision import Virtual_KeyboardApplication, DesktopControllerApplication
+from TabClasses import *
 
 
 class SideFrame(ck.CTkFrame):
@@ -15,7 +16,7 @@ class SideFrame(ck.CTkFrame):
         self.pack(ipadx=0, padx=SIDE_FRAME_PADDING, pady=SIDE_FRAME_PADDING, side=side, fill="y")
 
     def create_button(self, text, pady, command: callable(None) = None):
-        button = ck.CTkButton(self, text=text, border_width=2, border_color=BTN_BORDER_BG,
+        button = ck.CTkButton(self, text=text, border_width=1, border_color=BTN_BORDER_BG,
                               font=FONTS["JetBrains Mono_16"], text_color=BUTTON_TEXT_BG,
                               fg_color=BTN_BG, hover_color=BTN_HOVER_BG)
         if command is not None:
@@ -26,25 +27,26 @@ class SideFrame(ck.CTkFrame):
 
 class MainFrame(ck.CTk):
 
-    def __init__(self, title, geometry):
+    def __init__(self, title):
         super().__init__(fg_color=WIN_BG)
         self.title(title)
-        self.geometry(geometry)
+        self.minsize(WIN_WIDTH / 1.2, WIN_HEIGHT / 1.2)
+        self.geometry(f"{WIN_WIDTH}x{WIN_HEIGHT}")
         load_configs()
 
 
 class MainApp:
     def __init__(self):
-        main = MainFrame("AI Vision Machine Modules Application v0.01",
-                         f"{WIN_WIDTH}x{WIN_HEIGHT}")
-        side_frame = SideFrame(main, SIDE_FRAME_WIDTH, "right")
+        main = MainFrame("AI Vision Machine Modules Application v0.01")
+        side_frame = SideFrame(main, SIDE_FRAME_WIDTH, "left")
         side_frame.create_button("Click11", pady=25)
         side_frame.create_button("Click22", pady=0)
         side_frame.create_button("Click33", pady=25)
 
         tabs = CustomTabView(main)
         AIVisionMachineHome(tabs)
-        DesktopMouseInputTab(tabs)
+        DesktopMouseInputTab(tabs, self.open_desktop_mouse_app)
+        DesktopKeyboardInputTab(tabs, self.open_desktop_keyboard_app)
         tabs.init_tabs()
 
         tabs.pack(fill="both", expand=True, padx=24, pady=24)
@@ -53,6 +55,17 @@ class MainApp:
             main.mainloop()
         except KeyboardInterrupt as e:
             print(f"Keyboard Interrupt{e}")
+
+    # testing
+    def open_desktop_mouse_app(self):
+        application = DesktopControllerApplication.main()
+        thread = threading.Thread(target=application.start)
+        thread.start()
+
+    def open_desktop_keyboard_app(self):
+        application = Virtual_KeyboardApplication.main()
+        thread = threading.Thread(target=application.start)
+        thread.start()
 
 
 if __name__ == "__main__":
