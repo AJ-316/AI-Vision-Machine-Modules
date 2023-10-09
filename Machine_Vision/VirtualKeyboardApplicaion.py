@@ -9,7 +9,7 @@ from pynput.keyboard import Controller
 
 def main():
     pTime = 0
-    cap = cv2.VideoCapture(1)
+    cap = cv2.VideoCapture(0)
     cap.set(3, 1210)
     cap.set(4, 500)
 

@@ -513,7 +513,7 @@ class App(customtkinter.CTk):
                                                          "magna aliquyam erat, sed diam voluptua.\n\n")
         self.WordTextbox_0.configure(state="disabled")  # configure textbox to be read-only
 
-    # #######$$########
+    # #######$$########'''
 
     # Methods
     def open_input_dialog_event(self):
@@ -527,9 +527,6 @@ class App(customtkinter.CTk):
         new_scaling_float = int(new_scaling.replace("%", "")) / 100
         customtkinter.set_widget_scaling(new_scaling_float)
 
-    def sidebar_button_event(self):
-        print("sidebar_button click")
-
     def open_toplevel0(self):
         if self.toplevel_window0 is None or not self.toplevel_window0.winfo_exists():
             self.toplevel_window0 = ToplevelWindow0(self)  # create window if its None or destroyed
@@ -539,11 +536,6 @@ class App(customtkinter.CTk):
         if self.toplevel_window1 is None or not self.toplevel_window1.winfo_exists():
             self.toplevel_window1 = ToplevelWindow1(self)  # create window if its None or destroyed
             self.toplevel_window1.grab_set()
-
-    def open_toplevel2(self):
-        if self.toplevel_window2 is None or not self.toplevel_window2.winfo_exists():
-            self.toplevel_window2 = ToplevelWindow2(self)  # create window if its None or destroyed
-            self.toplevel_window2.grab_set()
 
     def open_DestopControllerApp(self):
         g = DesktopControllerApplication.main()

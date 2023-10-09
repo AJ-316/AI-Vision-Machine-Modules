@@ -9,7 +9,7 @@ def main():
 
     w = 1280
     h = 720
-    cam = cv2.VideoCapture(1, cv2.CAP_DSHOW)
+    cam = cv2.VideoCapture(0, cv2.CAP_DSHOW)
     cam.set(cv2.CAP_PROP_FRAME_WIDTH, window_width)
     cam.set(cv2.CAP_PROP_FRAME_HEIGHT, window_height)
     cam.set(cv2.CAP_PROP_FPS, fps)

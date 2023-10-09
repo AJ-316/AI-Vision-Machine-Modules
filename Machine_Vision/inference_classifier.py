@@ -23,7 +23,7 @@ def main(type):
     model_dict = pickle.load(open(file, 'rb'))
     model = model_dict['model']
 
-    cap = cv2.VideoCapture(1)
+    cap = cv2.VideoCapture(0)
 
     mp_hands = mp.solutions.hands
     mp_drawing = mp.solutions.drawing_utils
