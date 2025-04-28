@@ -5,7 +5,7 @@ import pyautogui, autopy
 from ctypes import cast, POINTER
 from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
-import VirtualGloveModule as htm
+from Machine_Vision import VirtualGloveModule as htm
 
 
 

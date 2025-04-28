@@ -46,7 +46,7 @@ class Tab:
 
         return button
 
-    def _init_content(self, body_text="", images=None, **action_buttons):
+    def _init_content(self, body_text="", images=None, images_height=300, **action_buttons):
         header_frame = ck.CTkFrame(self._frame, fg_color="transparent", corner_radius=50)
         header_frame.pack(fill="both", padx=10)
 
@@ -81,7 +81,7 @@ class Tab:
                                                            fg_color="transparent", orientation="horizontal",
                                                            border_width=2, border_color=WIN_BG)
             scrollable_image_frame.pack(fill="both")
-            scrollable_image_frame.configure(height=IMAGE_SIZE[1])
+            scrollable_image_frame.configure(height=images_height)
 
             image_frame = scrollable_image_frame
 

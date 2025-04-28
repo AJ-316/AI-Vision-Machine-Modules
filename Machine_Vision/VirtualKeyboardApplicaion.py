@@ -1,5 +1,5 @@
 import cv2
-from CVZONE_HandTrackingModule import HandDetector
+from Machine_Vision.CVZONE_HandTrackingModule import HandDetector
 from time import sleep
 import time
 import numpy as np

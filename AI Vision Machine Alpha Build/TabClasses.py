@@ -1,5 +1,10 @@
-from Tab import Tab
+import threading
+
 from AppConfigs import *
+from Machine_Vision import DesktopControllerApplication, Biceps_PushupWorkoutApplication, \
+    PresentationControllerAppliaction, VirtualKeyboardApplicaion, inference_classifier, \
+    SitupsApplication
+from Tab import Tab
 
 
 class AIVisionMachineHome(Tab):
@@ -36,7 +41,9 @@ class DesktopMouseInputTab(Tab):
             images=[self.name, self.name+"2"], Start=self.start_mouse_input)
 
     def start_mouse_input(self):
-        pass
+        g = DesktopControllerApplication.main()
+        t = threading.Thread(target=g.start)
+        t.start()
 
 
 class DesktopKeyboardInputTab(Tab):
@@ -53,7 +60,9 @@ class DesktopKeyboardInputTab(Tab):
             images=[self.name], Start=self.start_keyboard_input)
 
     def start_keyboard_input(self):
-        pass
+        g = VirtualKeyboardApplicaion.main()
+        t = threading.Thread(target=g.start)
+        t.start()
 
 
 class WorkoutTrainerTab(Tab):
@@ -67,10 +76,19 @@ class WorkoutTrainerTab(Tab):
                                      "user's body, such as arms and legs. It then collects statistical data based on "
                                      "the specific workout exercise being performed. This data is presented to the "
                                      "user, offering real-time feedback and guidance during their workout routine.",
-                           images=[self.name], Start=self.start_workout_trainer)
+                           images=[self.name],
+                           Biceps_Pushup_Trainer=self.start_biceps_pushup_trainer,
+                           Situps_Trainer=self.start_biceps_pushup_trainer)
 
-    def start_workout_trainer(self):
-        pass
+    def start_biceps_pushup_trainer(self):
+        g = Biceps_PushupWorkoutApplication.main()
+        t = threading.Thread(target=g.start)
+        t.start()
+
+    def start_situps_trainer(self):
+        g = SitupsApplication.main()
+        t = threading.Thread(target=g.start)
+        t.start()
 
 
 class PresentationControllerTab(Tab):
@@ -87,7 +105,9 @@ class PresentationControllerTab(Tab):
                            images=[self.name], Start=self.start_presentation_controller)
 
     def start_presentation_controller(self):
-        pass
+        g = PresentationControllerAppliaction.main()
+        t = threading.Thread(target=g.start)
+        t.start()
 
 
 class SignLanguageTab(Tab):
@@ -106,13 +126,17 @@ class SignLanguageTab(Tab):
                                      "this hand sign translation system, enabling accurate and context-aware "
                                      "communication through sign language",
                            images=[self.name],
-                           Sign_Language_Letters=self.start_sign_lang_word,
-                           Sign_Language_Words=self.start_sign_lang_word())
+                           Sign_Language_Letters=self.start_sign_lang_letter,
+                           Sign_Language_Words=self.start_sign_lang_word)
 
     def start_sign_lang_letter(self):
-        pass
+        g = inference_classifier.main(1)
+        t = threading.Thread(target=g.start)
+        t.start()
 
     def start_sign_lang_word(self):
-        pass
+        g = inference_classifier.main(0)
+        t = threading.Thread(target=g.start)
+        t.start()
 
 

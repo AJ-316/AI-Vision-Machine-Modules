@@ -50,7 +50,7 @@ ICON = "icon"
 
 def load_configs():
     global FONTS
-    load_fonts(**{"JetBrains Mono": [16, 24, 32], "Verdana": [14, 18]})
+    load_fonts(**{"JetBrains Mono": [16, 24, 32], "Verdana": [12, 14, 18]})
 
     load_images(ImageConfig(AI_VISION_MACHINE, IMAGE, LOGO_SIZE, False),
                 ImageConfig(AI_VISION_MACHINE, ICON, ICON_SIZE),

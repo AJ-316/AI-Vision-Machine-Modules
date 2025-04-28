@@ -1,4 +1,3 @@
-import threading
 from typing import Literal
 
 import customtkinter
@@ -26,6 +25,24 @@ class SideFrame(ck.CTkFrame):
         return button
 
 
+class AppearanceOptionMenu(ck.CTkFrame):
+    _values = ["Light", "Dark", "System"]
+
+    def __init__(self, master):
+        super().__init__(master, fg_color=FRAME_BG)
+        self.label = ck.CTkLabel(self, text="Theme:", fg_color=FRAME_BG, font=FONTS["JetBrains Mono_16"])
+        self.label.pack(side="left", padx=20, pady=20)
+        self.option_menu = ck.CTkOptionMenu(self, dropdown_font=FONTS["Verdana_12"],
+                                            font=FONTS["JetBrains Mono_16"], values=self._values,
+                                            command=self.change_appearance)
+        self.option_menu.pack(side="left")
+        self.option_menu.set(self._values[2])
+        self.change_appearance(self._values[2])
+
+    def change_appearance(self, choice):
+        customtkinter.set_appearance_mode(choice)
+
+
 class MainFrame(ck.CTk):
 
     def __init__(self, title):
@@ -39,12 +56,15 @@ class MainFrame(ck.CTk):
 class MainApp:
     def __init__(self):
         main = MainFrame("AI Vision Machine Modules Application v0.01")
+        tabs = CustomTabView(main)
+
         side_frame = SideFrame(main, SIDE_FRAME_WIDTH, "left")
         side_frame.create_button("Click11", pady=25)
         side_frame.create_button("Click22", pady=0)
         side_frame.create_button("Click33", pady=25)
-        customtkinter.set_appearance_mode("light")
-        tabs = CustomTabView(main)
+
+        AppearanceOptionMenu(side_frame).pack(side="bottom")
+
         AIVisionMachineHome(tabs)
         DesktopMouseInputTab(tabs)
         DesktopKeyboardInputTab(tabs)

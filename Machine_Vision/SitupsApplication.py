@@ -2,7 +2,7 @@
 import cv2
 import numpy as np
 import time
-import VirtualBodyPoseModule as pm
+from Machine_Vision import VirtualBodyPoseModule as pm
 
 def main():
     cap = cv2.VideoCapture(0)
